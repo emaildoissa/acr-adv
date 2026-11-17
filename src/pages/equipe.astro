@@ -1,0 +1,69 @@
+---
+import { Icon } from 'astro-icon/components';
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import { team, site } from '../data/site';
+---
+
+<Layout
+  title="Nossa Equipe"
+  description="Conheça os advogados do escritório ACR Advogados: experiência, especialização e atendimento próximo em cada área de atuação."
+>
+  <PageHero
+    title="Nossa Equipe"
+    subtitle="Profissionais dedicados, com formação continuada e foco total no seu caso."
+  />
+
+  <section class="py-20">
+    <div class="container-content space-y-16">
+      {team.map((member, i) => (
+        <div class:list={['grid md:grid-cols-3 gap-10 items-center', i % 2 === 1 && 'md:[&>*:first-child]:order-2']}>
+          <img
+            src={member.photo}
+            alt={`Foto de ${member.name}`}
+            class="rounded-2xl shadow-lg w-full aspect-square object-cover"
+            loading="lazy"
+          />
+          <div class="md:col-span-2 space-y-4">
+            <h2 class="font-heading text-2xl font-bold">{member.name}</h2>
+            <p class="text-sm text-muted">{member.role}</p>
+            <p class="text-body leading-relaxed">{member.bio}</p>
+            <div class="flex flex-wrap gap-2">
+              {member.areas.map((a) => (
+                <span class="inline-block bg-primary-light text-primary text-xs font-medium px-3 py-1.5 rounded-full">
+                  {a}
+                </span>
+              ))}
+            </div>
+            <div class="flex gap-3 pt-2">
+              <a href={site.social.linkedin} class="w-10 h-10 flex items-center justify-center rounded-full bg-neutral-100 hover:bg-accent hover:text-white transition" aria-label={`LinkedIn de ${member.name}`}>
+                <Icon name="bi:linkedin" />
+              </a>
+              <a href={`mailto:${site.email}`} class="w-10 h-10 flex items-center justify-center rounded-full bg-neutral-100 hover:bg-accent hover:text-white transition" aria-label={`E-mail de ${member.name}`}>
+                <Icon name="bi:envelope" />
+              </a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="bg-primary-dark text-white py-16">
+    <div class="container-content text-center">
+      <h2 class="text-3xl font-bold mb-3">Quer falar com um de nossos advogados?</h2>
+      <p class="text-neutral-300 max-w-2xl mx-auto mb-8">
+        Agende uma consulta inicial com o profissional da área mais adequada ao seu caso.
+      </p>
+      <a
+        href={site.whatsappUrl}
+        target="_blank"
+        rel="noopener"
+        class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-accent text-white rounded-lg hover:bg-accent-dark transition font-semibold"
+      >
+        <Icon name="bi:whatsapp" class="text-xl" />
+        Agendar consulta
+      </a>
+    </div>
+  </section>
+</Layout>

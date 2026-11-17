@@ -1,0 +1,102 @@
+---
+import { Icon } from 'astro-icon/components';
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import { getCollection, render } from 'astro:content';
+import { site } from '../../data/site';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const formatDate = (d: Date) =>
+  d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+
+const related = (await getCollection('blog', ({ data }) => !data.draft))
+  .filter((p) => p.id !== post.id)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+
+<Layout title={post.data.title} description={post.data.description}>
+  <PageHero title={post.data.title} subtitle={post.data.description} />
+
+  <section class="py-20">
+    <div class="container-content max-w-3xl">
+      <div class="flex items-center gap-3 text-sm text-muted mb-8">
+        <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+        {post.data.updatedDate && (
+          <>
+            <span aria-hidden="true">·</span>
+            <span>Atualizado em {formatDate(post.data.updatedDate)}</span>
+          </>
+        )}
+        {post.data.area && (
+          <>
+            <span aria-hidden="true">·</span>
+            <span class="bg-primary-light text-primary font-medium px-2.5 py-1 rounded-full text-xs">{post.data.area}</span>
+          </>
+        )}
+      </div>
+
+      {post.data.heroImage && (
+        <img
+          src={post.data.heroImage}
+          alt=""
+          class="w-full rounded-2xl mb-10"
+          loading="lazy"
+        />
+      )}
+
+      <article class="prose-custom space-y-4">
+        <Content />
+      </article>
+
+      <div class="mt-12 bg-primary-dark text-white rounded-2xl p-10 text-center">
+        <h2 class="font-heading text-2xl font-bold mb-3">Precisa de orientação sobre este assunto?</h2>
+        <p class="text-neutral-300 mb-6">Fale com a nossa equipe e agende uma consulta inicial.</p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <a
+            href={site.whatsappUrl}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-accent text-white rounded-lg hover:bg-accent-dark transition font-semibold"
+          >
+            <Icon name="bi:whatsapp" class="text-xl" />
+            WhatsApp
+          </a>
+          <a
+            href="/contato"
+            class="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white/30 text-white rounded-lg hover:bg-white/10 transition font-semibold"
+          >
+            Formulário de contato
+          </a>
+        </div>
+      </div>
+
+      {related.length > 0 && (
+        <div class="mt-16">
+          <h2 class="font-heading text-2xl font-bold mb-6">Continue lendo</h2>
+          <div class="space-y-3">
+            {related.map((p) => (
+              <a
+                href={`/blog/${p.id}`}
+                class="flex items-center justify-between gap-4 bg-white border border-border rounded-xl px-6 py-4 hover:border-accent transition group"
+              >
+                <div>
+                  <p class="font-semibold group-hover:text-accent transition">{p.data.title}</p>
+                  <p class="text-sm text-muted">{p.data.description}</p>
+                </div>
+                <Icon name="bi:arrow-right" class="text-accent shrink-0" />
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+</Layout>

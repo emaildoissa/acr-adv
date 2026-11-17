@@ -1,0 +1,82 @@
+---
+import { Icon } from 'astro-icon/components';
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import { testimonials } from '../data/site';
+
+const stats = [
+  { value: '10', label: 'Áreas de atuação' },
+  { value: '+X', label: 'Casos conduzidos (placeholder)' },
+  { value: 'X anos', label: 'De experiência (placeholder)' },
+  { value: '5,0', label: 'Nota média dos clientes (placeholder)' },
+];
+---
+
+<Layout
+  title="Avaliações de Clientes"
+  description="Veja o que os clientes dizem sobre o trabalho do escritório ACR Advogados: depoimentos de quem já resolveu seu caso com a nossa equipe."
+>
+  <PageHero
+    title="Avaliações"
+    subtitle="A melhor referência do nosso trabalho é a experiência de quem já passou pelo escritório."
+  />
+
+  <section class="py-20">
+    <div class="container-content">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+        {stats.map((s) => (
+          <div class="bg-primary-dark text-white rounded-xl p-8 text-center">
+            <p class="text-4xl font-heading font-bold text-accent-light mb-2">{s.value}</p>
+            <p class="text-sm text-neutral-300">{s.label}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        {testimonials.map((t) => (
+          <div class="bg-white border border-border rounded-xl p-8 hover:shadow-lg transition">
+            <div class="flex gap-1 text-accent mb-4" aria-hidden="true">
+              <Icon name="bi:star-fill" /><Icon name="bi:star-fill" /><Icon name="bi:star-fill" /><Icon name="bi:star-fill" /><Icon name="bi:star-fill" />
+            </div>
+            {t.video ? (
+              <div class="aspect-video rounded-lg bg-neutral-100 flex flex-col items-center justify-center gap-2 mb-4 text-sm text-muted">
+                <Icon name="bi:play-circle" class="text-4xl text-accent" />
+                Depoimento em vídeo — placeholder
+              </div>
+            ) : null}
+            <p class="text-body leading-relaxed mb-6">“{t.text}”</p>
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 flex items-center justify-center rounded-full bg-primary-light text-primary font-bold text-sm">
+                {t.name.split(' ').map((w) => w[0]).join('').slice(0, 2)}
+              </div>
+              <div>
+                <p class="font-semibold">{t.name}</p>
+                <p class="text-sm text-muted">{t.role}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <p class="text-xs text-muted mt-10 text-center">
+        Nota: depoimentos são placeholders. Ao publicar depoimentos reais, verifique as regras da OAB sobre publicidade
+        e, quando possível, obtenha autorização por escrito dos clientes.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-linear-to-r from-primary to-primary-hover text-white py-16">
+    <div class="container-content text-center">
+      <h2 class="text-3xl font-bold mb-3">Quer fazer parte dessas histórias?</h2>
+      <p class="text-neutral-200 max-w-2xl mx-auto mb-8">
+        Agende uma consulta e conheça nosso jeito de trabalhar — com ética, técnica e resultado.
+      </p>
+      <a
+        href="/contato"
+        class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-accent text-white rounded-lg hover:bg-accent-dark transition font-semibold"
+      >
+        Entrar em contato
+      </a>
+    </div>
+  </section>
+</Layout>

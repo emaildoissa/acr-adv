@@ -1,0 +1,26 @@
+{
+  "name": "acr-advogados",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "logo": "node scripts/logo.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.5",
+    "@fontsource-variable/inter": "^5.3.0",
+    "@fontsource-variable/playfair-display": "^5.3.0",
+    "@iconify-json/bi": "^1.2.7",
+    "@tailwindcss/vite": "^4.3.5",
+    "alpinejs": "^3.17.5",
+    "astro": "^7.4.12",
+    "astro-icon": "^1.2.0",
+    "glightbox": "^3.3.1",
+    "mupdf": "^1.28.6",
+    "pngjs": "^7.0.0",
+    "tailwindcss": "^4.3.5"
+  }
+}

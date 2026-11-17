@@ -1,0 +1,73 @@
+---
+import { Icon } from 'astro-icon/components';
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import { getCollection } from 'astro:content';
+import { site } from '../../data/site';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const formatDate = (d: Date) =>
+  d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+---
+
+<Layout
+  title="Blog"
+  description="Artigos sobre Direito em linguagem acessível, escritos pela equipe do ACR Advogados."
+>
+  <PageHero
+    title="Blog"
+    subtitle="Conteúdo jurídico em linguagem simples, escrito pela nossa equipe."
+  />
+
+  <section class="py-20">
+    <div class="container-content">
+      {posts.length === 0 ? (
+        <div class="max-w-2xl mx-auto text-center bg-neutral-100 border border-border rounded-2xl p-10">
+          <Icon name="bi:journal-text" class="text-5xl text-accent mb-4" />
+          <h2 class="font-heading text-2xl font-bold mb-3">Nenhum artigo publicado ainda</h2>
+          <p class="text-body leading-relaxed">
+            Estamos preparando os primeiros conteúdos. Enquanto isso, explore nossas
+            <a href="/areas" class="text-accent font-semibold hover:text-accent-dark">áreas de atuação</a>
+            ou entre em contato para tirar suas dúvidas.
+          </p>
+        </div>
+      ) : (
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {posts.map((post) => (
+            <a
+              href={`/blog/${post.id}`}
+              class="group bg-white border border-border rounded-xl overflow-hidden hover:shadow-lg transition"
+            >
+              <div class="overflow-hidden">
+                <img
+                  src={post.data.heroImage ?? '/img/blog-1.jpg'}
+                  alt=""
+                  class="w-full aspect-video object-cover group-hover:scale-105 transition duration-500"
+                  loading="lazy"
+                />
+              </div>
+              <div class="p-6">
+                <p class="text-xs text-muted mb-3">
+                  <time datetime={post.data.pubDate.toISOString()}>
+                    {formatDate(post.data.pubDate)}
+                  </time>
+                </p>
+                <h2 class="font-heading text-lg font-bold mb-2 group-hover:text-accent transition">
+                  {post.data.title}
+                </h2>
+                <p class="text-body text-sm leading-relaxed mb-4">{post.data.description}</p>
+                <span class="inline-flex items-center gap-1 text-sm font-semibold text-accent">
+                  Ler artigo
+                  <Icon name="bi:arrow-right" class="text-xs" />
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+</Layout>

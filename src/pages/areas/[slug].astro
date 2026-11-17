@@ -1,0 +1,118 @@
+---
+import { Icon } from 'astro-icon/components';
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import PracticeAreaCard from '../../components/PracticeAreaCard.astro';
+import { practiceAreas, getArea } from '../../data/practice-areas';
+import { site } from '../../data/site';
+
+export function getStaticPaths() {
+  return practiceAreas.map((area) => ({ params: { slug: area.slug }, props: { area } }));
+}
+
+const { area } = Astro.props;
+const otherAreas = practiceAreas.filter((a) => a.slug !== area.slug).slice(0, 3);
+---
+
+<Layout title={area.title} description={area.summary}>
+  <PageHero title={area.title} subtitle={area.summary} image={area.image} crumb="Áreas de Atuação" />
+
+  <section class="py-20">
+    <div class="container-content">
+      <div class="grid lg:grid-cols-3 gap-12">
+        <div class="lg:col-span-2 space-y-12">
+          <div>
+            <div class="flex items-center gap-4 mb-6">
+              <div class="w-14 h-14 flex items-center justify-center rounded-lg bg-primary-light text-primary">
+                <Icon name={area.icon} class="text-3xl" />
+              </div>
+              <h2 class="font-heading text-2xl font-bold">Visão geral</h2>
+            </div>
+            {area.intro.map((p) => <p class="text-body leading-relaxed mb-4">{p}</p>)}
+          </div>
+
+          <div>
+            <h2 class="font-heading text-2xl font-bold mb-6">Serviços prestados</h2>
+            <ul class="grid sm:grid-cols-2 gap-4">
+              {area.services.map((s) => (
+                <li class="flex items-start gap-3 bg-neutral-100 rounded-lg p-4 text-sm text-body">
+                  <Icon name="bi:check2-circle" class="text-accent text-lg shrink-0 mt-0.5" />
+                  {s}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="font-heading text-2xl font-bold mb-6">Por que escolher nossa equipe nesta área</h2>
+            <ul class="space-y-4">
+              {area.benefits.map((b) => (
+                <li class="flex items-start gap-3 text-body leading-relaxed">
+                  <Icon name="bi:patch-check" class="text-accent text-xl shrink-0 mt-0.5" />
+                  {b}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <aside class="space-y-8">
+          <div class="bg-primary-dark text-white rounded-xl p-8">
+            <h3 class="font-heading text-xl font-bold mb-3">Fale sobre o seu caso</h3>
+            <p class="text-sm text-neutral-300 mb-6 leading-relaxed">
+              Agende uma consulta inicial nesta área. Analisamos seus documentos e apresentamos as opções com custos
+              claros.
+            </p>
+            <a
+              href={site.whatsappUrl}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center justify-center gap-2 w-full px-6 py-3 bg-accent text-white rounded-lg hover:bg-accent-dark transition font-semibold"
+            >
+              <Icon name="bi:whatsapp" />
+              Agendar consulta
+            </a>
+            <a
+              href="/contato"
+              class="mt-3 inline-flex items-center justify-center gap-2 w-full px-6 py-3 border border-white/30 text-white rounded-lg hover:bg-white/10 transition font-semibold"
+            >
+              Formulário de contato
+            </a>
+            <p class="text-xs text-neutral-400 mt-4">{site.hours}</p>
+          </div>
+
+          <div class="bg-neutral-100 rounded-xl p-8">
+            <h3 class="font-heading text-lg font-bold mb-4">Outras áreas</h3>
+            <div class="space-y-2">
+              {otherAreas.map((a) => (
+                <a
+                  href={`/areas/${a.slug}`}
+                  class="flex items-center justify-between gap-2 text-sm text-body hover:text-accent transition py-2 border-b border-border last:border-0"
+                >
+                  {a.shortTitle}
+                  <Icon name="bi:arrow-right" class="text-xs text-accent" />
+                </a>
+              ))}
+              <a
+                href="/areas"
+                class="inline-flex items-center gap-1 text-sm font-semibold text-accent hover:text-accent-dark transition pt-2"
+              >
+                Ver todas as áreas
+                <Icon name="bi:arrow-right" class="text-xs" />
+              </a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-neutral-100">
+    <div class="container-content">
+      <h2 class="font-heading text-2xl font-bold mb-8 text-center">Conheça também</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {otherAreas.map((a) => <PracticeAreaCard area={a} />)}
+      </div>
+    </div>
+  </section>
+</Layout>

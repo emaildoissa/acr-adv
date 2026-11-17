@@ -1,0 +1,43 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Página não encontrada"
+  description="A página que você procura não existe ou foi movida."
+>
+  <section class="py-32">
+    <div class="container-content max-w-2xl text-center">
+      <p class="text-accent font-semibold tracking-widest uppercase text-sm mb-4">Erro 404</p>
+      <h1 class="font-heading text-5xl md:text-6xl font-bold mb-6">Página não encontrada</h1>
+      <p class="text-body text-lg leading-relaxed mb-10">
+        O endereço que você acessou não existe ou foi movido. Verifique o link ou navegue pelas opções abaixo — se
+        precisar de orientação jurídica, teremos prazer em ajudar.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="/"
+          class="inline-flex items-center justify-center rounded-full bg-primary px-8 py-4 font-semibold text-white transition hover:bg-primary-hover"
+        >
+          Voltar ao início
+        </a>
+        <a
+          href="/contato"
+          class="inline-flex items-center justify-center rounded-full border border-accent bg-accent px-8 py-4 font-semibold text-white transition hover:bg-accent-dark"
+        >
+          Fale conosco
+        </a>
+      </div>
+      <div class="mt-12 border-t border-border pt-8">
+        <p class="text-muted text-sm mb-4">Links úteis:</p>
+        <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
+          <a href="/areas" class="text-accent hover:text-accent-dark underline">Áreas de atuação</a>
+          <a href="/sobre" class="text-accent hover:text-accent-dark underline">Sobre o escritório</a>
+          <a href="/equipe" class="text-accent hover:text-accent-dark underline">Equipe</a>
+          <a href="/faq" class="text-accent hover:text-accent-dark underline">Perguntas frequentes</a>
+          <a href="/blog" class="text-accent hover:text-accent-dark underline">Blog</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

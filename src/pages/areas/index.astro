@@ -1,0 +1,24 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import PracticeAreaCard from '../../components/PracticeAreaCard.astro';
+import { practiceAreas } from '../../data/practice-areas';
+---
+
+<Layout
+  title="Áreas de Atuação"
+  description="Conheça as dez áreas de atuação do escritório: Família, Trabalhista, Criminal, Civil e Consumidor, Empresarial, Imobiliário, Previdenciário, Tributário, Sucessões e Médico/Saúde."
+>
+  <PageHero
+    title="Áreas de Atuação"
+    subtitle="Dez frentes de atuação com equipes especializadas. Escolha uma área para conhecer nossos serviços, diferenciais e próximos passos."
+  />
+
+  <section class="py-20">
+    <div class="container-content">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {practiceAreas.map((area) => <PracticeAreaCard area={area} />)}
+      </div>
+    </div>
+  </section>
+</Layout>

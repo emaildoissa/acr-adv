@@ -1,0 +1,435 @@
+---
+import { Icon } from 'astro-icon/components';
+import Layout from '../layouts/Layout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import PracticeAreaCard from '../components/PracticeAreaCard.astro';
+import { site, whyChooseUs, howWeWork, testimonials, team } from '../data/site';
+import { practiceAreas } from '../data/practice-areas';
+
+const faqs = [
+  {
+    q: 'Como funciona a primeira consulta?',
+    a: 'A primeira consulta serve para ouvirmos seu caso, analisar os documentos iniciais e explicar, em linguagem clara, quais são as alternativas, os prazos prováveis e os honorários. Você sai da reunião sabendo exatamente quais são as opções — sem compromisso de contratação.',
+  },
+  {
+    q: 'Quanto custam os honorários advocatícios?',
+    a: 'Os honorários variam conforme a área, a complexidade e o tipo de atuação (consultiva ou contenciosa). Apresentamos sempre uma proposta por escrito antes do início dos trabalhos, sem cobranças surpresa. Em algumas áreas, como trabalhista e previdenciária, avaliamos honorários condicionados ao êxito.',
+  },
+  {
+    q: 'Vocês atendem só na cidade onde o escritório está instalado?',
+    a: 'Não. Além do atendimento presencial, realizamos consultas por videochamada e atuamos em processos em diferentes comarcas e estados, contando com uma rede de correspondentes quando necessário.',
+  },
+  {
+    q: 'Quanto tempo demora um processo?',
+    a: 'Depende da área, da instância e da complexidade do caso. Na consulta inicial informamos os prazos médios observados na prática para situações semelhantes e acompanhamos cada movimentação, avisando você sempre que houver novidade relevante.',
+  },
+  {
+    q: 'É possível resolver meu caso sem processo judicial?',
+    a: 'Muitas vezes, sim. Priorizamos a negociação, a mediação e as vias administrativas quando elas são mais rápidas e econômicas. Quando o acordo não é possível ou não é a melhor estratégia, ingressamos com a ação necessária.',
+  },
+  {
+    q: 'Como inicio meu atendimento?',
+    a: 'Basta entrar em contato por WhatsApp, telefone ou e-mail, ou preencher o formulário da página de contato. Retornamos em até um dia útil para agendar a consulta inicial.',
+  },
+];
+
+const heroSlides = [
+  { src: '/img/slide-1.jpg', caption: 'Nossa equipe jurídica' },
+  { src: '/img/slide-2.jpg', caption: 'Consulta inicial dedicada' },
+  { src: '/img/slide-3.jpg', caption: 'Atuação em todas as instâncias' },
+];
+
+const trustItems = [
+  { icon: 'bi:award', text: 'Excelência jurídica comprovada' },
+  { icon: 'bi:trophy', text: 'Confiança de clientes e colegas' },
+  { icon: 'bi:briefcase', text: 'Atuação dedicada em 10 áreas' },
+];
+---
+
+<Layout
+  title="Advocacia com ética, técnica e resultado"
+  description={site.description}
+>
+  <!-- Hero -->
+  <section class="relative py-20 md:py-28 overflow-hidden">
+    <div
+      class="absolute inset-0 bg-cover bg-fixed"
+      style="background-image: url('/img/hero-bg.jpg')"
+      aria-hidden="true"
+    ></div>
+    <div class="absolute inset-0 bg-linear-to-r from-primary-dark/95 to-primary/80" aria-hidden="true"></div>
+    <div class="container-content relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-2 lg:items-center gap-12">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-widest text-accent-light mb-4">{site.fullName}</p>
+          <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            Defendendo seus direitos com excelência e compromisso
+          </h1>
+          <p class="text-lg md:text-xl text-neutral-200 mb-8 leading-relaxed">
+            Atendimento jurídico personalizado em dez áreas do Direito. Estratégia sob medida, comunicação clara e
+            acompanhamento próximo em cada etapa do seu caso.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 mb-12">
+            <a
+              href={site.whatsappUrl}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-accent text-white border border-accent rounded-lg hover:bg-accent-dark transition font-semibold"
+            >
+              <Icon name="bi:telephone-fill" class="text-lg" />
+              Agendar consulta
+            </a>
+            <a
+              href="/areas"
+              class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-primary-dark border border-white rounded-lg hover:bg-neutral-200 transition font-semibold"
+            >
+              Áreas de atuação
+              <Icon name="bi:arrow-right" class="text-sm" />
+            </a>
+          </div>
+          <div class="flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-neutral-200">
+            {
+              trustItems.map((item) => (
+                <span class="inline-flex items-center gap-2">
+                  <Icon name={item.icon} class="text-accent-light text-lg" aria-hidden="true" />
+                  {item.text}
+                </span>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Slider -->
+        <div class="relative lg:ps-12">
+          <div
+            x-data={`{
+              slides: ${JSON.stringify(heroSlides)},
+              current: 0,
+              autoTimer: null,
+              dragStartX: 0,
+              dragOffset: 0,
+              init() {
+                this.autoTimer = setInterval(() => this.next(), 8000);
+              },
+              next() { this.current = (this.current + 1) % this.slides.length; },
+              prev() { this.current = (this.current - 1 + this.slides.length) % this.slides.length; },
+              goTo(i) { this.current = i; },
+              style(i) {
+                const n = this.slides.length;
+                let off = i - this.current;
+                if (off > n / 2) off -= n;
+                if (off < -n / 2) off += n;
+                return 'transform: translateX(' + (off * 100) + '%); transition: transform 0.5s ease; z-index: ' + (off === 0 ? 10 : 5) + '; opacity: ' + (off === 0 ? 1 : 0) + ';';
+              },
+              startX(x) { this.dragStartX = x; if (this.autoTimer) clearInterval(this.autoTimer); },
+              moveX(x) { this.dragOffset = x - this.dragStartX; },
+              endX() {
+                if (Math.abs(this.dragOffset) > 50) { this.dragOffset < 0 ? this.next() : this.prev(); }
+                this.dragOffset = 0;
+                this.autoTimer = setInterval(() => this.next(), 8000);
+              },
+            }`}
+            class="relative h-80 md:h-96 lg:h-[420px] select-none"
+          >
+            {
+              heroSlides.map((slide, i) => (
+                <div
+                  class="absolute inset-0 overflow-hidden rounded-2xl shadow-2xl"
+                  style={`transform: translateX(${i === 0 ? 0 : 100}%); opacity: ${i === 0 ? 1 : 0}; z-index: ${i === 0 ? 10 : 5}`}
+                  x-bind:style="style(i)"
+                >
+                  <img
+                    src={slide.src}
+                    alt={slide.caption}
+                    class="w-full h-full object-cover"
+                    loading="eager"
+                    draggable="false"
+                  />
+                  <div class="absolute inset-x-0 bottom-0 bg-linear-to-t from-black/70 to-transparent p-5">
+                    <p class="text-white font-semibold">{slide.caption}</p>
+                  </div>
+                </div>
+              ))
+            }
+            <button
+              x-on:click="prev()"
+              aria-label="Slide anterior"
+              class="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full bg-white/90 text-primary-dark hover:bg-white transition shadow-lg"
+            >
+              <Icon name="bi:chevron-left" class="text-lg" />
+            </button>
+            <button
+              x-on:click="next()"
+              aria-label="Próximo slide"
+              class="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full bg-white/90 text-primary-dark hover:bg-white transition shadow-lg"
+            >
+              <Icon name="bi:chevron-right" class="text-lg" />
+            </button>
+            <div class="absolute bottom-4 right-5 z-20 flex gap-2">
+              {
+                heroSlides.map((_, i) => (
+                  <button
+                    x-on:click={`goTo(${i})`}
+                    class="w-2.5 h-2.5 rounded-full bg-white/60 hover:bg-white transition"
+                    aria-label={`Ir para o slide ${i + 1}`}
+                  />
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section class="py-20 bg-neutral-100">
+    <div class="container-content">
+      <SectionHeading
+        eyebrow="Por que nos escolher"
+        icon="bi:shield-check"
+        title="Advocacia construída sobre confiança"
+        subtitle="Unimos técnica jurídica sólida a um atendimento humano e transparente."
+        align="split"
+      />
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {
+          whyChooseUs.map((item) => (
+            <div class="bg-white rounded-xl border border-border p-8 hover:shadow-lg transition">
+              <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-accent/10 text-accent mb-5">
+                <Icon name={item.icon} class="text-2xl" />
+              </div>
+              <h3 class="font-heading text-lg font-bold mb-3">{item.title}</h3>
+              <p class="text-body text-sm leading-relaxed">{item.text}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Practice Areas -->
+  <section id="practice-areas" class="py-20">
+    <div class="container-content">
+      <SectionHeading
+        eyebrow="Áreas de atuação"
+        icon="bi:briefcase"
+        title="Como podemos ajudar você"
+        subtitle="Atuação dedicada em dez áreas do Direito, com equipes especializadas e estratégia ajustada a cada caso."
+        align="split"
+      />
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {practiceAreas.map((area) => <PracticeAreaCard area={area} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- Attorneys -->
+  <section class="py-20 bg-neutral-100">
+    <div class="container-content">
+      <SectionHeading
+        eyebrow="Nossa equipe"
+        icon="bi:people"
+        title="Advogados que você pode confiar"
+        subtitle="Profissionais experientes, dedicados e próximos de você durante todo o processo."
+        align="split"
+      />
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {
+          team.map((member) => (
+            <a href="/equipe" class="group block bg-white rounded-xl border border-border overflow-hidden">
+              <div class="relative overflow-hidden">
+                <img
+                  src={member.photo}
+                  alt={member.name}
+                  class="w-full aspect-square object-cover group-hover:scale-105 transition duration-500"
+                  loading="lazy"
+                />
+                <div class="absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-primary-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition" />
+              </div>
+              <div class="p-6">
+                <h3 class="font-heading text-lg font-bold group-hover:text-accent transition">{member.name}</h3>
+                <p class="text-sm text-muted mt-1">{member.role}</p>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+      <div class="text-center mt-10">
+        <a
+          href="/equipe"
+          class="inline-flex items-center gap-2 px-8 py-3 bg-primary text-white rounded-lg hover:bg-primary-hover transition font-semibold"
+        >
+          Conheça a equipe
+          <Icon name="bi:arrow-right" class="text-sm" />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- How We Work -->
+  <section class="py-20">
+    <div class="container-content">
+      <SectionHeading
+        eyebrow="Como trabalhamos"
+        icon="bi:diagram-3"
+        title="Três passos para começar"
+        subtitle="Um processo claro desde o primeiro contato, para você sempre saber o que vem a seguir."
+        align="split"
+      />
+      <div class="grid md:grid-cols-3 gap-8">
+        {
+          howWeWork.map((step) => (
+            <div class="relative bg-neutral-100 rounded-xl p-8">
+              <span class="absolute -top-5 left-8 w-10 h-10 flex items-center justify-center rounded-full bg-accent text-white font-bold">
+                {step.step}
+              </span>
+              <div class="mt-4">
+                <Icon name={step.icon} class="text-3xl text-primary mb-4" />
+                <h3 class="font-heading text-xl font-bold mb-3">{step.title}</h3>
+                <p class="text-body text-sm leading-relaxed">{step.text}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="py-20 bg-primary-dark text-white">
+    <div class="container-content">
+      <SectionHeading
+        eyebrow="Avaliações"
+        icon="bi:star-fill"
+        title="O que nossos clientes dizem"
+        subtitle="A confiança de quem já passou pelo escritório é a nossa melhor referência."
+        align="split"
+        light
+      />
+      <div class="grid md:grid-cols-3 gap-6">
+        {
+          testimonials.map((t) => (
+            <div class="rounded-xl bg-white/5 border border-white/10 p-8">
+              <div class="flex gap-1 text-accent-light mb-4" aria-hidden="true">
+                <Icon name="bi:star-fill" />
+                <Icon name="bi:star-fill" />
+                <Icon name="bi:star-fill" />
+                <Icon name="bi:star-fill" />
+                <Icon name="bi:star-fill" />
+              </div>
+              {t.video ? (
+                <div class="aspect-video rounded-xl border border-accent bg-white/10 flex flex-col items-center justify-center gap-2 mb-4 text-sm text-neutral-400">
+                  <Icon name="bi:play-circle" class="text-4xl text-accent" />
+                  Depoimento em vídeo
+                </div>
+              ) : null}
+              <p class="text-neutral-200 leading-relaxed mb-6">{t.text}</p>
+              <div class="flex items-center gap-3">
+                <span class="w-12 h-12 flex items-center justify-center rounded-full bg-accent text-white font-bold shrink-0">
+                  {t.name.replace('Cliente ', 'C')}
+                </span>
+                <div>
+                  <p class="font-semibold text-white">{t.name}</p>
+                  <p class="text-sm text-neutral-400">{t.role}</p>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+      <div class="text-center mt-10">
+        <a
+          href="/avaliacoes"
+          class="inline-flex items-center gap-2 px-8 py-3 border border-white/30 text-white rounded-lg hover:bg-white/10 transition font-semibold"
+        >
+          Ver todas as avaliações
+          <Icon name="bi:arrow-right" class="text-sm" />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 bg-neutral-100">
+    <div class="container-content">
+      <div class="grid lg:grid-cols-3 gap-10">
+        <div class="lg:sticky lg:top-28 self-start">
+          <span class="inline-flex items-center gap-2 bg-accent/10 text-accent px-4 py-2 rounded-full text-sm font-medium mb-4">
+            <Icon name="bi:question-circle" class="text-base" aria-hidden="true" />
+            Dúvidas frequentes
+          </span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Perguntas que ouvimos com frequência</h2>
+          <p class="text-muted leading-relaxed mb-6">
+            Reunimos as respostas para as dúvidas mais comuns sobre nosso atendimento, honorários e processos.
+          </p>
+          <a
+            href="/faq"
+            class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-hover transition font-semibold"
+          >
+            Ver todas as perguntas
+            <Icon name="bi:arrow-right" class="text-sm" />
+          </a>
+        </div>
+        <div class="lg:col-span-2 divide-y divide-border border-y border-border">
+          {
+            faqs.map((faq) => (
+              <div x-data="{ open: false }" class="py-2">
+                <button
+                  x-on:click="open = !open"
+                  class="w-full flex justify-between items-center gap-4 text-left py-4 font-semibold text-lg hover:text-accent transition"
+                >
+                  {faq.q}
+                  <Icon
+                    name="bi:chevron-down"
+                    class="shrink-0 transition-transform"
+                    x-bind:class="{ 'rotate-180': open }"
+                  />
+                </button>
+                <div x-show="open" x-transition x-cloak class="pb-4 text-body leading-relaxed pr-8">
+                  {faq.a}
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="relative py-16 overflow-hidden">
+    <div
+      class="absolute inset-0 bg-cover bg-fixed"
+      style="background-image: url('/img/hero-bg.jpg')"
+      aria-hidden="true"
+    ></div>
+    <div class="absolute inset-0 bg-linear-to-r from-primary-dark/95 to-primary/90" aria-hidden="true"></div>
+    <div class="container-content relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+      <div class="max-w-xl text-center md:text-left">
+        <h2 class="text-3xl font-bold text-white mb-3">Pronto para conversar sobre o seu caso?</h2>
+        <p class="text-neutral-200 leading-relaxed">
+          Agende uma consulta inicial. Analisamos seu caso, explicamos suas opções e apresentamos uma proposta clara —
+          sem compromisso.
+        </p>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-4 shrink-0">
+        <a
+          href={site.whatsappUrl}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-accent text-white border border-accent rounded-lg hover:bg-accent-dark transition font-semibold"
+        >
+          <Icon name="bi:telephone-fill" class="text-lg" />
+          Agendar consulta
+        </a>
+        <a
+          href="/contato"
+          class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-primary-dark border border-white rounded-lg hover:bg-neutral-200 transition font-semibold"
+        >
+          Formulário de contato
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,27 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  image?: string;
+  crumb?: string;
+}
+const { title, subtitle, image = '/img/hero-bg.jpg', crumb } = Astro.props;
+---
+
+<section class="relative py-20 md:py-24 text-white overflow-hidden">
+  <div
+    class="absolute inset-0 bg-cover bg-fixed"
+    style={`background-image: url('${image}')`}
+    aria-hidden="true"
+  ></div>
+  <div class="absolute inset-0 bg-linear-to-r from-primary-dark/95 to-primary/85" aria-hidden="true"></div>
+  <div class="container-content relative z-10">
+    <nav class="text-sm text-neutral-300 mb-4" aria-label="Você está aqui">
+      <a href="/" class="hover:text-accent-light transition">Início</a>
+      <span class="mx-2">/</span>
+      <span class="text-accent-light">{crumb ?? title}</span>
+    </nav>
+    <h1 class="font-heading text-3xl md:text-5xl font-bold text-white mb-4">{title}</h1>
+    {subtitle && <p class="text-lg text-neutral-200 max-w-3xl leading-relaxed">{subtitle}</p>}
+  </div>
+</section>

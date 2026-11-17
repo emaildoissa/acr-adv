@@ -1,0 +1,184 @@
+---
+import { Icon } from 'astro-icon/components';
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import { site } from '../data/site';
+---
+
+<Layout
+  title="Contato"
+  description="Entre em contato com o escritório ACR Advogados por telefone, WhatsApp, e-mail ou formulário. Retornamos em até um dia útil."
+>
+  <PageHero
+    title="Contato"
+    subtitle="Escolha o canal que preferir. Respondemos todas as mensagens em até um dia útil."
+  />
+
+  <section class="py-20">
+    <div class="container-content grid lg:grid-cols-5 gap-12">
+      <!-- Info -->
+      <div class="lg:col-span-2 space-y-6">
+        <div class="bg-neutral-100 rounded-xl p-6 flex gap-4">
+          <div class="w-12 h-12 shrink-0 flex items-center justify-center rounded-lg bg-primary-light text-primary">
+            <Icon name="bi:geo-alt" class="text-2xl" />
+          </div>
+          <div>
+            <h3 class="font-heading font-bold mb-1">Endereço</h3>
+            <p class="text-body text-sm leading-relaxed">{site.address}</p>
+          </div>
+        </div>
+        <div class="bg-neutral-100 rounded-xl p-6 flex gap-4">
+          <div class="w-12 h-12 shrink-0 flex items-center justify-center rounded-lg bg-primary-light text-primary">
+            <Icon name="bi:telephone-fill" class="text-2xl" />
+          </div>
+          <div>
+            <h3 class="font-heading font-bold mb-1">Telefone / WhatsApp</h3>
+            <p class="text-body text-sm">
+              <a href={`tel:${site.phone.replace(/\D/g, '')}`} class="hover:text-accent transition">{site.phone}</a>
+            </p>
+            <p class="text-body text-sm">
+              <a href={site.whatsappUrl} target="_blank" rel="noopener" class="text-accent hover:text-accent-dark transition font-medium">
+                Conversar no WhatsApp
+              </a>
+            </p>
+          </div>
+        </div>
+        <div class="bg-neutral-100 rounded-xl p-6 flex gap-4">
+          <div class="w-12 h-12 shrink-0 flex items-center justify-center rounded-lg bg-primary-light text-primary">
+            <Icon name="bi:envelope" class="text-2xl" />
+          </div>
+          <div>
+            <h3 class="font-heading font-bold mb-1">E-mail</h3>
+            <p class="text-body text-sm">
+              <a href={`mailto:${site.email}`} class="hover:text-accent transition">{site.email}</a>
+            </p>
+          </div>
+        </div>
+        <div class="bg-neutral-100 rounded-xl p-6 flex gap-4">
+          <div class="w-12 h-12 shrink-0 flex items-center justify-center rounded-lg bg-primary-light text-primary">
+            <Icon name="bi:clock" class="text-2xl" />
+          </div>
+          <div>
+            <h3 class="font-heading font-bold mb-1">Horário de atendimento</h3>
+            <p class="text-body text-sm">{site.hours}</p>
+          </div>
+        </div>
+        <div class="rounded-xl overflow-hidden border border-border relative min-h-[220px]">
+          <img
+            src="/img/area-empresarial.jpg"
+            alt="Fachada do escritório em região comercial"
+            class="absolute inset-0 w-full h-full object-cover"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-linear-to-t from-primary-dark/85 to-transparent"></div>
+          <div class="absolute inset-x-0 bottom-0 p-5 text-white">
+            <p class="inline-flex items-center gap-2 font-semibold">
+              <Icon name="bi:geo-alt-fill" class="text-accent-light" />
+              {site.address}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div class="lg:col-span-3">
+        <div class="bg-white border border-border rounded-2xl p-8 shadow-sm">
+          <h2 class="font-heading text-2xl font-bold mb-2">Envie sua mensagem</h2>
+          <p class="text-muted text-sm mb-8">
+            Preencha o formulário e retornaremos em até um dia útil. Para casos urgentes, prefira o WhatsApp.
+          </p>
+          <form class="grid sm:grid-cols-2 gap-5" action="#" method="post">
+            <div>
+              <label for="nome" class="block text-sm font-semibold mb-2">Nome completo *</label>
+              <input
+                id="nome"
+                name="nome"
+                type="text"
+                required
+                placeholder="Seu nome"
+                class="w-full rounded-lg border border-border px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+              />
+            </div>
+            <div>
+              <label for="email" class="block text-sm font-semibold mb-2">E-mail *</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                placeholder="voce@exemplo.com"
+                class="w-full rounded-lg border border-border px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+              />
+            </div>
+            <div>
+              <label for="telefone" class="block text-sm font-semibold mb-2">Telefone *</label>
+              <input
+                id="telefone"
+                name="telefone"
+                type="tel"
+                required
+                placeholder="(00) 00000-0000"
+                class="w-full rounded-lg border border-border px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+              />
+            </div>
+            <div>
+              <label for="area" class="block text-sm font-semibold mb-2">Área relacionada</label>
+              <select
+                id="area"
+                name="area"
+                class="w-full rounded-lg border border-border px-4 py-3 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+              >
+                <option value="">Selecione uma área (opcional)</option>
+                <option>Direito de Família</option>
+                <option>Direito do Trabalho</option>
+                <option>Direito Criminal</option>
+                <option>Direito Civil e do Consumidor</option>
+                <option>Direito Empresarial</option>
+                <option>Direito Imobiliário</option>
+                <option>Direito Previdenciário</option>
+                <option>Direito Tributário</option>
+                <option>Sucessões e Planejamento Patrimonial</option>
+                <option>Direito Médico e da Saúde</option>
+                <option>Outro assunto</option>
+              </select>
+            </div>
+            <div class="sm:col-span-2">
+              <label for="mensagem" class="block text-sm font-semibold mb-2">Mensagem *</label>
+              <textarea
+                id="mensagem"
+                name="mensagem"
+                rows="6"
+                required
+                placeholder="Descreva resumidamente o seu caso. Quanto mais contexto, melhor poderemos ajudá-lo."
+                class="w-full rounded-lg border border-border px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent resize-y"
+              ></textarea>
+            </div>
+            <div class="sm:col-span-2">
+              <label class="flex items-start gap-3 text-sm text-muted">
+                <input type="checkbox" required class="mt-1 accent-[#90754e]" />
+                <span>
+                  Concordo com o tratamento dos meus dados conforme a
+                  <a href="/privacidade" class="text-accent underline hover:text-accent-dark">Política de Privacidade</a>.
+                  Autorizo o contato por telefone, e-mail ou WhatsApp.
+                </span>
+              </label>
+            </div>
+            <div class="sm:col-span-2">
+              <button
+                type="submit"
+                class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-10 py-4 bg-accent text-white rounded-lg hover:bg-accent-dark transition font-semibold"
+              >
+                <Icon name="bi:send" />
+                Enviar mensagem
+              </button>
+            </div>
+          </form>
+          <p class="text-xs text-muted mt-6">
+            Nota: este formulário é um placeholder de apresentação. Conecte-o a um serviço de formulários (Formspree,
+            Getform, próprio back-end etc.) quando os contatos reais forem definidos.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

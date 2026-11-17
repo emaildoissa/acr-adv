@@ -1,0 +1,113 @@
+---
+import { Icon } from 'astro-icon/components';
+import { site, nav } from '../data/site';
+import { practiceAreas } from '../data/practice-areas';
+
+const year = new Date().getFullYear();
+const areaLinks = practiceAreas.slice(0, 6);
+const otherLinks = nav.filter((item) => item.href !== '/areas' && item.href !== '/contato');
+---
+
+<footer class="bg-primary-darker text-neutral-300 relative bg-cover" style={`background-image: url('/img/bg-footer.svg');`}>
+  <div class="absolute inset-0 bg-primary-darker/95"></div>
+  <div class="container-content py-16 relative">
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <div class="relative">
+            <img src="/img/favicon.png" class="max-w-12" loading="lazy" alt={`Logotipo ${site.name}`} />
+          </div>
+          <div>
+            <div class="font-heading font-bold text-2xl text-white">{site.name}</div>
+            <div class="text-xs text-neutral-400">Advocacia</div>
+          </div>
+        </div>
+        <p class="text-sm mb-4 leading-relaxed">
+          Atendimento jurídico com ética, técnica e compromisso. Seus direitos, nossa prioridade.
+        </p>
+        <div class="inline-flex items-center gap-2 bg-accent/20 text-accent-light px-3 py-1.5 rounded-full text-xs font-medium mb-4">
+          <Icon name="bi:patch-check" />
+          Escritório registrado na OAB
+        </div>
+        <div class="flex gap-3">
+          <a href={site.social.instagram} class="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-accent transition text-white" aria-label="Instagram">
+            <Icon name="bi:instagram" />
+          </a>
+          <a href={site.social.facebook} class="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-accent transition text-white" aria-label="Facebook">
+            <Icon name="bi:facebook" />
+          </a>
+          <a href={site.social.linkedin} class="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-accent transition text-white" aria-label="LinkedIn">
+            <Icon name="bi:linkedin" />
+          </a>
+          <a href={site.social.youtube} class="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-accent transition text-white" aria-label="YouTube">
+            <Icon name="bi:youtube" />
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-white font-bold text-lg mb-4">Áreas de Atuação</h3>
+        <ul class="space-y-2 text-sm">
+          {areaLinks.map((area) => (
+            <li>
+              <a href={`/areas/${area.slug}`} class="hover:text-accent-light transition">{area.title}</a>
+            </li>
+          ))}
+          <li>
+            <a href="/areas" class="inline-flex items-center gap-1 text-accent-light hover:text-white transition font-medium">
+              Ver todas as áreas
+              <Icon name="bi:arrow-right" class="text-xs" />
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-white font-bold text-lg mb-4">Links Rápidos</h3>
+        <ul class="space-y-2 text-sm">
+          {otherLinks.map((item) => (
+            <li>
+              <a href={item.href} class="hover:text-accent-light transition">{item.label}</a>
+            </li>
+          ))}
+          <li><a href="/faq" class="hover:text-accent-light transition">Perguntas Frequentes</a></li>
+          <li><a href="/privacidade" class="hover:text-accent-light transition">Política de Privacidade</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-white font-bold text-lg mb-4">Contato</h3>
+        <ul class="space-y-3 text-sm">
+          <li class="flex gap-3">
+            <Icon name="bi:geo-alt" class="text-accent shrink-0 mt-0.5" />
+            <span>{site.address}</span>
+          </li>
+          <li class="flex gap-3">
+            <Icon name="bi:telephone-fill" class="text-accent shrink-0 mt-0.5" />
+            <a href={`tel:${site.phone.replace(/\D/g, '')}`} class="hover:text-accent-light transition">{site.phone}</a>
+          </li>
+          <li class="flex gap-3">
+            <Icon name="bi:envelope" class="text-accent shrink-0 mt-0.5" />
+            <a href={`mailto:${site.email}`} class="hover:text-accent-light transition">{site.email}</a>
+          </li>
+          <li class="flex gap-3">
+            <Icon name="bi:clock" class="text-accent shrink-0 mt-0.5" />
+            <span>{site.hours}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-white/10 pt-8 space-y-4">
+      <p class="text-xs leading-relaxed text-neutral-400">{site.oabDisclaimer}</p>
+      <div class="flex flex-col md:flex-row justify-between md:items-center gap-3 text-sm text-neutral-400">
+        <p>© {year} {site.fullName}. Todos os direitos reservados.</p>
+        <div class="flex gap-4">
+          <a href="/privacidade" class="hover:text-accent-light transition">Privacidade</a>
+          <a href="/termos" class="hover:text-accent-light transition">Termos</a>
+          <a href="/cookies" class="hover:text-accent-light transition">Cookies</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,34 @@
+---
+import { Icon } from 'astro-icon/components';
+import { site } from '../data/site';
+---
+
+<div class="bg-primary-dark text-white text-sm py-2 hidden md:block">
+  <div class="container-content flex justify-between items-center">
+    <div class="flex items-center gap-6">
+      <span class="inline-flex items-center gap-2">
+        <Icon name="bi:geo-alt" />
+        {site.addressShort}
+      </span>
+      <span class="inline-flex items-center gap-2">
+        <Icon name="bi:clock" />
+        {site.hours}
+      </span>
+    </div>
+    <div class="flex items-center gap-6">
+      <a href={`mailto:${site.email}`} class="inline-flex items-center gap-2 hover:text-accent-light transition">
+        <Icon name="bi:envelope" />
+        {site.email}
+      </a>
+      <a href={site.social.instagram} class="hover:text-accent-light transition" aria-label="Instagram">
+        <Icon name="bi:instagram" />
+      </a>
+      <a href={site.social.facebook} class="hover:text-accent-light transition" aria-label="Facebook">
+        <Icon name="bi:facebook" />
+      </a>
+      <a href={site.social.linkedin} class="hover:text-accent-light transition" aria-label="LinkedIn">
+        <Icon name="bi:linkedin" />
+      </a>
+    </div>
+  </div>
+</div>

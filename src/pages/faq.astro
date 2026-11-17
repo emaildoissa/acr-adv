@@ -1,0 +1,104 @@
+---
+import { Icon } from 'astro-icon/components';
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import { site } from '../data/site';
+
+const faqs = [
+  {
+    q: 'Como funciona a primeira consulta?',
+    a: 'A primeira consulta serve para ouvirmos seu caso, analisar os documentos iniciais e explicar, em linguagem clara, quais são as alternativas, os prazos prováveis e os honorários. Você sai da reunião sabendo exatamente quais são as opções — sem compromisso de contratação.',
+  },
+  {
+    q: 'A primeira consulta é cobrada?',
+    a: 'Placeholder: defina aqui sua política. Muitos escritórios oferecem uma primeira conversa exploratória sem custo e cobram a consulta técnica quando há análise aprofundada de documentos ou parecer.',
+  },
+  {
+    q: 'Quanto custam os honorários advocatícios?',
+    a: 'Os honorários variam conforme a área, a complexidade e o tipo de atuação (consultiva ou contenciosa). Apresentamos sempre uma proposta por escrito antes do início dos trabalhos, sem cobranças surpresa. Em algumas áreas, como trabalhista e previdenciária, avaliamos honorários condicionados ao êxito.',
+  },
+  {
+    q: 'Como os honorários são cobrados — adiantado ou ao final?',
+    a: 'Depende do caso e da área. Em geral, parte é adiantada para cobrir o início dos trabalhos e o restante pode ser parcelado ou condicionado ao êxito, quando cabível. Tudo é formalizado em contrato de honorários antes de qualquer atuação.',
+  },
+  {
+    q: 'Quanto tempo demora um processo?',
+    a: 'Depende da área, da instância e da complexidade do caso. Na consulta inicial informamos os prazos médios observados na prática para situações semelhantes e acompanhamos cada movimentação, avisando você sempre que houver novidade relevante.',
+  },
+  {
+    q: 'É possível resolver meu caso sem processo judicial?',
+    a: 'Muitas vezes, sim. Priorizamos a negociação, a mediação e as vias administrativas quando elas são mais rápidas e econômicas. Quando o acordo não é possível ou não é a melhor estratégia, ingressamos com a ação necessária.',
+  },
+  {
+    q: 'Vocês atendem só na cidade onde o escritório está instalado?',
+    a: 'Não. Além do atendimento presencial, realizamos consultas por videochamada e atuamos em processos em diferentes comarcas e estados, contando com uma rede de correspondentes quando necessário.',
+  },
+  {
+    q: 'Como acompanho o andamento do meu processo?',
+    a: 'Você recebe atualizações sempre que houver movimentação relevante, pelo canal que preferir — WhatsApp, e-mail ou ligação. Também pode consultar o andamento diretamente com o advogado responsável pelo seu caso.',
+  },
+  {
+    q: 'Quais documentos devo levar na primeira consulta?',
+    a: 'Leve documentos pessoais (RG, CPF) e tudo que se relacione ao caso: contratos, notificações, laudos, comprovantes, comunicações do INSS, cartas de demissão, entre outros. Na dúvida, traga o que tiver — organizamos juntos na consulta.',
+  },
+  {
+    q: 'Como inicio meu atendimento?',
+    a: 'Basta entrar em contato por WhatsApp, telefone ou e-mail, ou preencher o formulário da página de contato. Retornamos em até um dia útil para agendar a consulta inicial.',
+  },
+];
+---
+
+<Layout
+  title="Perguntas Frequentes"
+  description="Respostas para as dúvidas mais comuns sobre consultas, honorários, prazos processuais e o funcionamento do atendimento do escritório ACR Advogados."
+>
+  <PageHero
+    title="Perguntas Frequentes"
+    subtitle="Reunimos as respostas para as dúvidas que mais ouvimos. Se a sua não estiver aqui, fale conosco."
+  />
+
+  <section class="py-20">
+    <div class="container-content max-w-4xl">
+      <div class="divide-y divide-border border-y border-border">
+        {faqs.map((faq) => (
+          <div x-data="{ open: false }" class="py-2">
+            <button
+              x-on:click="open = !open"
+              class="w-full flex justify-between items-center gap-4 text-left py-5 font-semibold text-lg hover:text-accent transition"
+            >
+              {faq.q}
+              <Icon name="bi:chevron-down" class="shrink-0 transition-transform" x-bind:class="{ 'rotate-180': open }" />
+            </button>
+            <div x-show="open" x-transition x-cloak class="pb-5 text-body leading-relaxed pr-8">
+              {faq.a}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-12 bg-primary-dark text-white rounded-2xl p-10 text-center">
+        <h2 class="font-heading text-2xl font-bold mb-3">Sua dúvida não foi respondida?</h2>
+        <p class="text-neutral-300 mb-6 max-w-xl mx-auto">
+          Fale diretamente com a nossa equipe. Respondemos em até um dia útil.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <a
+            href={site.whatsappUrl}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-accent text-white rounded-lg hover:bg-accent-dark transition font-semibold"
+          >
+            <Icon name="bi:whatsapp" class="text-xl" />
+            WhatsApp
+          </a>
+          <a
+            href="/contato"
+            class="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white/30 text-white rounded-lg hover:bg-white/10 transition font-semibold"
+          >
+            Formulário de contato
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

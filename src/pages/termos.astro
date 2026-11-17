@@ -1,0 +1,61 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import { site } from '../data/site';
+---
+
+<Layout
+  title="Termos de Uso"
+  description="Termos de uso do site ACR Advogados: condições de acesso, limitação de responsabilidade e propriedade intelectual."
+>
+  <PageHero title="Termos de Uso" subtitle="Condições de acesso e utilização deste site." />
+
+  <section class="py-20">
+    <div class="container-content max-w-3xl space-y-10">
+      <div>
+        <h2 class="font-heading text-2xl font-bold mb-4">1. Objeto</h2>
+        <p class="text-body leading-relaxed">
+          Estes termos regulam o acesso ao site {site.name} ({site.url.replace('https://', '')}). O site tem caráter
+          exclusivamente informativo e institucional.
+        </p>
+      </div>
+      <div>
+        <h2 class="font-heading text-2xl font-bold mb-4">2. Natureza das informações</h2>
+        <p class="text-body leading-relaxed">
+          O conteúdo publicado neste site não constitui aconselhamento jurídico individualizado. Cada caso exige
+          análise específica por advogado(a) inscrito(a) na OAB. A aplicação de normas jurídicas pode variar conforme
+          o caso concreto, a jurisdição e as alterações legislativas.
+        </p>
+      </div>
+      <div>
+        <h2 class="font-heading text-2xl font-bold mb-4">3. Limitação de responsabilidade</h2>
+        <p class="text-body leading-relaxed">
+          Não nos responsabilizamos por decisões tomadas com base exclusivamente nas informações deste site, nem por
+          interrupções temporárias de disponibilidade. Links para sites de terceiros não implicam responsabilidade
+          sobre seu conteúdo.
+        </p>
+      </div>
+      <div>
+        <h2 class="font-heading text-2xl font-bold mb-4">4. Propriedade intelectual</h2>
+        <p class="text-body leading-relaxed">
+          Textos, marca, logotipo e estrutura visual deste site pertencem ao {site.fullName} e não podem ser
+          reproduzidos sem autorização prévia e por escrito, salvo citação breve com atribuição.
+        </p>
+      </div>
+      <div>
+        <h2 class="font-heading text-2xl font-bold mb-4">5. Publicidade e concorrência</h2>
+        <p class="text-body leading-relaxed">
+          Este site respeita as regras sobre publicidade e informação da advocacia previstas no Código de Ética e
+          Disciplina da OAB e no Provimento nº 205/2021 do Conselho Federal da OAB.
+        </p>
+      </div>
+      <div>
+        <h2 class="font-heading text-2xl font-bold mb-4">6. Foro</h2>
+        <p class="text-body leading-relaxed">
+          Fica eleito o foro do domicílio do escritório para dirimir eventuais controvérsias oriundas destes termos.
+        </p>
+        <p class="text-sm text-muted mt-4">Última atualização: novembro de 2026.</p>
+      </div>
+    </div>
+  </section>
+</Layout>

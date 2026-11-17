@@ -1,0 +1,67 @@
+---
+import '../styles/global.css';
+import Topbar from '../components/Topbar.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import BackToTop from '../components/BackToTop.astro';
+import { site } from '../data/site';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = site.description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="pt-BR" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title} — {site.name}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/png" href="/img/favicon.png" />
+    <meta name="theme-color" content="#0b2a4a" />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'LegalService',
+      name: site.fullName,
+      description: site.description,
+      url: site.url,
+      telephone: site.phone,
+      email: site.email,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: site.address,
+        addressCountry: 'BR',
+      },
+      openingHours: 'Mo-Fr 09:00-18:00',
+    })} />
+  </head>
+  <body class="bg-white" x-data="{ mobileMenuOpen: false }">
+    <Topbar />
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    <BackToTop />
+
+    <style is:global>
+      [x-cloak] {
+        display: none !important;
+      }
+    </style>
+
+    <script>
+      import Alpine from 'alpinejs';
+      window.Alpine = Alpine;
+      Alpine.start();
+    </script>
+  </body>
+</html>

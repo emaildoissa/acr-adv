@@ -1,0 +1,56 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  eyebrow?: string;
+  icon?: string;
+  title: string;
+  subtitle?: string;
+  align?: 'center' | 'left' | 'split';
+  light?: boolean;
+}
+const { eyebrow, icon, title, subtitle, align = 'center', light = false } = Astro.props;
+---
+
+<div class:list={['mb-12', align === 'center' ? 'text-center' : 'text-left']}>
+  {eyebrow && (
+    <span
+      class:list={[
+        'inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-4',
+        light ? 'bg-accent/20 text-accent-light' : 'bg-accent/10 text-accent',
+      ]}
+    >
+      {icon && <Icon name={icon} class="text-base" aria-hidden="true" />}
+      {eyebrow}
+    </span>
+  )}
+  {
+    align === 'split' ? (
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+        <h2 class:list={['text-3xl md:text-4xl font-bold max-w-xl', light ? 'text-white' : '']}>
+          {title}
+        </h2>
+        {subtitle && (
+          <p class:list={['text-base leading-relaxed max-w-md', light ? 'text-neutral-300' : 'text-muted']}>
+            {subtitle}
+          </p>
+        )}
+      </div>
+    ) : (
+      <>
+        <h2 class:list={['text-3xl md:text-4xl font-bold mb-4', light ? 'text-white' : '']}>{title}</h2>
+        {subtitle && (
+          <p
+            class:list={[
+              'text-lg leading-relaxed max-w-3xl',
+              align === 'center' ? 'mx-auto' : '',
+              light ? 'text-neutral-300' : 'text-muted',
+            ]}
+          >
+            {subtitle}
+          </p>
+        )}
+      </>
+    )
+  }
+</div>

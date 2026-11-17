@@ -1,0 +1,108 @@
+---
+import { Icon } from 'astro-icon/components';
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { site, whyChooseUs, howWeWork } from '../data/site';
+---
+
+<Layout
+  title="Sobre o Escritório"
+  description="Conheça a história, os valores e o modo de trabalho do escritório Antonio Carlos Rosa Advocacia — ACR Advogados."
+>
+  <PageHero
+    title="Sobre o Escritório"
+    subtitle="Uma advocacia construída sobre ética, técnica e proximidade com o cliente."
+  />
+
+  <section class="py-20">
+    <div class="container-content grid lg:grid-cols-2 gap-12 items-center">
+      <div class="space-y-4">
+        <p class="text-sm font-semibold uppercase tracking-widest text-accent mb-2">Nossa história</p>
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Um escritório para atender pessoas e empresas</h2>
+        <p class="text-body leading-relaxed">
+          Placeholder: aqui entra a história do escritório — quando foi fundado, por quem, e como evoluiu até hoje.
+          Conte em poucas linhas o diferencial da sua trajetória profissional e o que motivou a criação do ACR
+          Advogados.
+        </p>
+        <p class="text-body leading-relaxed">
+          Hoje, o escritório atua em dez áreas do Direito, com equipes especializadas e um princípio que atravessa
+          todos os casos: explicar com clareza, agir com ética e buscar o melhor resultado possível para cada cliente.
+        </p>
+        <p class="text-body leading-relaxed">
+          Atendemos tanto pessoas físicas — famílias, trabalhadores, consumidores, aposentados — quanto empresas de
+          todos os portes, sempre com a mesma dedicação e o mesmo padrão de comunicação.
+        </p>
+      </div>
+      <img
+        src="/img/about.jpg"
+        alt="Equipe do escritório reunida em sala de reuniões"
+        class="rounded-2xl shadow-xl w-full"
+        loading="lazy"
+      />
+    </div>
+  </section>
+
+  <section class="py-20 bg-neutral-100">
+    <div class="container-content">
+      <SectionHeading
+        eyebrow="Nossos valores"
+        title="Princípios que orientam cada caso"
+        subtitle="Mais do que palavras: são compromissos que você pode cobrar de nós a qualquer momento."
+      />
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {whyChooseUs.map((v) => (
+          <div class="bg-white rounded-xl border border-border p-8 hover:shadow-lg transition">
+            <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-primary-light text-primary mb-5">
+              <Icon name={v.icon} class="text-2xl" />
+            </div>
+            <h3 class="font-heading text-lg font-bold mb-3">{v.title}</h3>
+            <p class="text-body text-sm leading-relaxed">{v.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20">
+    <div class="container-content">
+      <SectionHeading
+        eyebrow="Metodologia"
+        title="Como trabalhamos"
+        subtitle="Um método claro, pensado para você acompanhar cada decisão do seu processo."
+      />
+      <div class="grid md:grid-cols-3 gap-8">
+        {howWeWork.map((step) => (
+          <div class="relative bg-neutral-100 rounded-xl p-8">
+            <span class="absolute -top-5 left-8 w-10 h-10 flex items-center justify-center rounded-full bg-accent text-white font-bold">
+              {step.step}
+            </span>
+            <div class="mt-4">
+              <Icon name={step.icon} class="text-3xl text-primary mb-4" />
+              <h3 class="font-heading text-xl font-bold mb-3">{step.title}</h3>
+              <p class="text-body text-sm leading-relaxed">{step.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-linear-to-r from-primary to-primary-hover text-white py-16">
+    <div class="container-content text-center">
+      <h2 class="text-3xl font-bold mb-3">Vamos conversar?</h2>
+      <p class="text-neutral-200 max-w-2xl mx-auto mb-8 leading-relaxed">
+        Entre em contato para agendar uma consulta inicial. Estamos prontos para ouvir você.
+      </p>
+      <a
+        href={site.whatsappUrl}
+        target="_blank"
+        rel="noopener"
+        class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-accent text-white rounded-lg hover:bg-accent-dark transition font-semibold"
+      >
+        <Icon name="bi:whatsapp" class="text-xl" />
+        Agendar consulta
+      </a>
+    </div>
+  </section>
+</Layout>

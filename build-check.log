@@ -1,0 +1,49 @@
+
+> acr-advogados@1.0.0 build
+> astro build
+
+[2m12:17:57[22m [34m[content][39m Syncing content
+[2m12:17:57[22m [34m[content][39m Synced content
+[2m12:17:57[22m [34m[types][39m Generated [2m1.14s[22m
+[2m12:17:57[22m [34m[build][39m output: [34m"static"[39m
+[2m12:17:57[22m [34m[build][39m mode: [34m"static"[39m
+[2m12:17:57[22m [34m[build][39m directory: [34mC:\Users\Marcos Issa\Documents\acr advogados\dist\[39m
+[2m12:17:57[22m [34m[build][39m Collecting build info...
+[2m12:17:57[22m [34m[build][39m [32m✓ Completed in 1.22s.[39m
+[2m12:17:57[22m [34m[build][39m Building static entrypoints...
+[2m12:17:58[22m [34m[astro-icon][39m Loaded icons from src/icons, bi
+[2m12:17:58[22m [34m[vite][39m [32m✓ built in 1.34s[39m
+[2m12:17:59[22m [34m[vite][39m [32m✓ built in 146ms[39m
+[2m12:17:59[22m [34m[build][39m Rearranging server assets...
+
+[42m[30m generating static routes [39m[49m
+[2m12:17:59[22m   [34m├─[39m [2m/404.html[22m [2m(+31ms)[22m 
+[2m12:17:59[22m   [34m├─[39m [2m/areas/familia/index.html[22m [2m(+11ms)[22m 
+[2m12:17:59[22m   [34m├─[39m [2m/areas/trabalhista/index.html[22m [2m(+6ms)[22m 
+[2m12:17:59[22m   [34m├─[39m [2m/areas/criminal/index.html[22m [2m(+5ms)[22m 
+[2m12:17:59[22m   [34m├─[39m [2m/areas/civil-consumidor/index.html[22m [2m(+8ms)[22m 
+[2m12:17:59[22m   [34m├─[39m [2m/areas/empresarial/index.html[22m [2m(+7ms)[22m 
+[2m12:17:59[22m   [34m├─[39m [2m/areas/imobiliario/index.html[22m [2m(+6ms)[22m 
+[2m12:17:59[22m   [34m├─[39m [2m/areas/previdenciario/index.html[22m [2m(+11ms)[22m 
+[2m12:17:59[22m   [34m├─[39m [2m/areas/tributario/index.html[22m [2m(+7ms)[22m 
+[2m12:17:59[22m   [34m├─[39m [2m/areas/sucessoes/index.html[22m [2m(+6ms)[22m 
+[2m12:17:59[22m   [34m├─[39m [2m/areas/medico-saude/index.html[22m [2m(+5ms)[22m 
+[2m12:17:59[22m   [34m├─[39m [2m/areas/index.html[22m [2m(+8ms)[22m 
+[2m12:17:59[22m   [34m├─[39m [2m/avaliacoes/index.html[22m [2m(+10ms)[22m 
+[2m12:17:59[22m   [34m├─[39m [2m/blog/exemplo-como-funciona-uma-consulta/index.html[22m [2m(+6ms)[22m 
+[2m12:17:59[22m   [34m├─[39m [2m/blog/index.html[22m [2m(+10ms)[22m 
+[2m12:17:59[22m   [34m├─[39m [2m/contato/index.html[22m [2m(+10ms)[22m 
+[2m12:17:59[22m   [34m├─[39m [2m/cookies/index.html[22m [2m(+8ms)[22m 
+[2m12:17:59[22m   [34m├─[39m [2m/equipe/index.html[22m [2m(+10ms)[22m 
+[2m12:17:59[22m   [34m├─[39m [2m/faq/index.html[22m [2m(+21ms)[22m 
+[2m12:17:59[22m   [34m├─[39m [2m/privacidade/index.html[22m [2m(+11ms)[22m 
+[2m12:17:59[22m   [34m├─[39m [2m/sobre/index.html[22m [2m(+18ms)[22m 
+[2m12:17:59[22m   [34m├─[39m [2m/termos/index.html[22m [2m(+19ms)[22m 
+[2m12:17:59[22m   [34m├─[39m [2m/index.html[22m [2m(+20ms)[22m 
+[2m12:17:59[22m [32m✓ Completed in 432ms.
+[39m
+[2m12:17:59[22m [34m[build][39m [32m✓ Completed in 2.13s.[39m
+[2m12:17:59[22m [34m[@astrojs/sitemap][39m `sitemap-index.xml` created at `dist`
+[2m12:17:59[22m [34m[build][39m 23 page(s) built in [1m3.40s[22m
+[2m12:17:59[22m [34m[build][39m [1mComplete![22m
+EXITCODE=0  
